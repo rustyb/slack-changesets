@@ -1,0 +1,29 @@
+{
+  "name": "slack-changesets",
+  "version": "0.0.1",
+  "description": "using planet-stream to power webhooks posting to slack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustyb/slack-changesets.git"
+  },
+  "keywords": [
+    "slack",
+    "openstreetmap",
+    "planet-stream"
+  ],
+  "author": "Colin Broderick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rustyb/slack-changesets/issues"
+  },
+  "homepage": "https://github.com/rustyb/slack-changesets#readme",
+  "dependencies": {
+    "planet-stream": "^0.3.2",
+    "slack-node": "^0.2.0"
+  }
+}
