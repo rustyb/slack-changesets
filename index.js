@@ -3,7 +3,6 @@
 // start planet-stream
 var argv = require('minimist')(process.argv.slice(2));
 
-var R = require('ramda');
 var planetstream = require('planet-stream')({
   limit: argv.limit,
   host: process.env.REDIS_PORT_6379_TCP_ADDR || process.env.REDIS_HOST || '127.0.0.1',
@@ -58,5 +57,4 @@ planetstream.map(JSON.parse)
     console.log("NOT IN LAT LONG")
   }
   
-
 });
