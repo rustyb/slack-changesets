@@ -31,13 +31,7 @@ function postSlack(obj){
 // Filter out records that have no metadata
 planetstream.map(JSON.parse)
 .filter(function (data) {
-  if (argv['hashtags']) {
-    if (data.metadata && data.metadata.comment) {
-      return getHashtags(data.metadata.comment).length > 0;
-    }
-  } else {
-    return data.hasOwnProperty('metadata');
-  }
+  return data.hasOwnProperty('metadata');
 })
 .onValue(function (obj) {
   var x = {
@@ -52,7 +46,7 @@ planetstream.map(JSON.parse)
   if (x.min_lat >=-30.751277776257812 && x.max_lat <= -28.53144 && x.min_lon >= 26.74072265625 && x.max_lon <= 29.498291015624996){
     console.log('PROBABLY IN LESOTHO')
     postSlack(x)
-    console.log('[kinesis obj metadata]:' + JSON.stringify(x))
+    console.log('[obj metadata]:' + JSON.stringify(x))
   } else {
     console.log("NOT IN LAT LONG")
   }
