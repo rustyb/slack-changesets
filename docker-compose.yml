@@ -9,3 +9,4 @@ app:
     - PS_OUTPUT_DEBUG='true'
   links:
     - redis
+  restart: always
