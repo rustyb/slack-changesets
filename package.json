@@ -17,7 +17,7 @@
     "planet-stream"
   ],
   "author": "Colin Broderick",
-  "license": "ISC",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/rustyb/slack-changesets/issues"
   },
