@@ -1,6 +1,6 @@
 {
   "name": "slack-changesets",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "using planet-stream to power webhooks posting to slack",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/rustyb/slack-changesets#readme",
   "dependencies": {
-    "planet-stream": "^0.3.2",
+    "minimist": "^1.2.0",
+    "planet-stream": "https://github.com/developmentseed/planet-stream/tarball/master",
     "slack-node": "^0.2.0"
   }
 }

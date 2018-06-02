@@ -4,9 +4,7 @@ redis:
     - '6379'
 app:
   build: .
-  environment:
-    - LOG_LEVEL='debug'
-    - PS_OUTPUT_DEBUG='true'
+  env_file: .env
   links:
     - redis
   restart: always

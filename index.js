@@ -9,11 +9,25 @@ var planetstream = require('planet-stream')({
   port: process.env.REDIS_PORT_6379_TCP_PORT || process.env.REDIS_PORT || 6379
 });
 
+var webhookUri = argv.slackWebhook || process.env.slackWebhook;
+var bbox;
+
+if (argv.bbox) {
+  bbox = JSON.parse(argv.bbox); //|| [26.74072265625, -30.751277776257812, 29.487304687499996, -28.53144]
+}
+
+if (process.env.bbox) {
+  bbox = JSON.parse(process.env.bbox);
+}
+
+if (!webhookUri && !bbox) {
+  console.log('You must specifiy both a slack webhook and bbox')
+  process.exit(1)
+}
 
 function postSlack(obj){
   console.log("Posting to SLACK")
   var Slack = require('slack-node');
-  webhookUri = "https://hooks.slack.com/services/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";
   slack = new Slack();
   slack.setWebhook(webhookUri);
   
@@ -24,7 +38,7 @@ function postSlack(obj){
     username: "webhookbot",
     text: "[NEW CHANGESET] There were " + obj.count + " changes made by *" + obj.user + "* in the changeset.\n\n View it at: " + link
   }, function(err, response) {
-    console.log(response);
+    console.log(err);
   });
 }
 
@@ -43,10 +57,12 @@ planetstream.map(JSON.parse)
     'max_lat': obj.metadata.max_lat,
     'count': obj.elements.length
   }
-  if (x.min_lat >=-30.751277776257812 && x.max_lat <= -28.53144 && x.min_lon >= 26.74072265625 && x.max_lon <= 29.498291015624996){
-    console.log('PROBABLY IN LESOTHO')
+
+
+  if (x.min_lat >= bbox[1] && x.max_lat <= bbox[3] && x.min_lon >= bbox[0] && x.max_lon <= bbox[2]){
+    console.log('PROBABLY IN BBOX')
     postSlack(x)
-    console.log('[obj metadata]:' + JSON.stringify(x))
+    console.log('[metadata]:' + JSON.stringify(x))
   } else {
     console.log("NOT IN LAT LONG")
   }
